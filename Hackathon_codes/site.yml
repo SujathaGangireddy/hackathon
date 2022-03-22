@@ -1,0 +1,14 @@
+---
+- name: Playbook to 
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - ec2_vpc
+    - Internet_Gateway
+    - public_subnet
+    - security_group
+    - Route_table
+    - key_ec2
+#    - launch_ec2
+    - vpc_peering

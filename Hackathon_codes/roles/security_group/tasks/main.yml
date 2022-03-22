@@ -1,0 +1,47 @@
+---
+- name: create ec2 security group for 1st VPC
+  ec2_group:
+    vpc_id: "{{ ec2_vpc_1_result.vpc.id }}"
+    region: "{{ region }}"
+    state: present
+    name: "{{ security_group_name_1 }}"
+    description: "{{ security_group_name_1 }}"
+    tags:
+       Name: "{{ security_group_name_1  }}"
+    rules:
+    - proto: tcp
+      ports:
+      - 22
+      - 80
+      cidr_ip: "{{ traffic_ip }}"
+      rule_desc: allow all traffic on port 22
+  register: security_group_1_results
+
+- debug:
+    msg: 
+     - "{{ security_group_1_results.group_name }}"
+     - "{{ security_group_1_results.group_id }}"
+
+    
+- name: create ec2 security group for 2nd VPC
+  ec2_group:
+    vpc_id: "{{ ec2_vpc_2_result.vpc.id }}"
+    region: "{{ region }}"
+    state: present
+    name: "{{ security_group_name_2 }}"
+    description: "{{ security_group_name_2 }}"
+    tags:
+       Name: "{{ security_group_name_2  }}"
+    rules:
+    - proto: tcp
+      ports:
+      - 22
+      - 80
+      cidr_ip: "{{ traffic_ip }}"
+      rule_desc: allow all traffic on port 22
+  register: security_group_2_results
+
+- debug:
+    msg: 
+     - "{{ security_group_2_results.group_name }}"
+     - "{{ security_group_2_results.group_id }}"

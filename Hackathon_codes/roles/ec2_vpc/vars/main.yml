@@ -1,0 +1,7 @@
+---
+first_vpc_name: Hackathon_VPC_1
+cidr_range_1: 10.0.0.0/26
+region: us-east-2
+second_vpc_name: Hackathon_VPC_2
+cidr_range_2: 10.1.0.0/26
+

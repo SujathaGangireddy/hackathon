@@ -1,0 +1,22 @@
+---
+- name: creating the First  ec2_VPC
+  ec2_vpc_net:
+    name: "{{ first_vpc_name }}"
+    cidr_block: "{{ cidr_range_1 }}"
+    region: "{{ region }}"
+    dns_support: yes
+    dns_hostnames: yes
+    tenancy: default
+    state: present
+  register: ec2_vpc_1_result
+
+- name: creating the Second  ec2_VPC
+  ec2_vpc_net:
+    name: "{{ second_vpc_name }}"
+    cidr_block: "{{ cidr_range_2 }}"
+    region: "{{ region }}"
+    dns_support: yes
+    dns_hostnames: yes
+    tenancy: default
+    state: present
+  register: ec2_vpc_2_result

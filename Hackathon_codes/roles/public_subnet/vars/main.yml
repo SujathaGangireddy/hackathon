@@ -1,0 +1,19 @@
+---
+region: us-east-2
+zone: us-east-2a
+sub_pub_1_cidr: 10.0.0.32/28
+sub_pub_1_name: Hackathon_subnet_public_1
+
+sub_pub_2_cidr: 10.1.0.32/28
+sub_pub_2_name: Hackathon_subnet_public_2
+
+sub_prv_1_cidr: 10.0.0.0/28
+sub_prv_1_name: Hackathon_subnet_private_1
+
+sub_prv_2_cidr: 10.1.0.0/28
+sub_prv_2_name: Hackathon_subnet_private_2
+
+Hackathon_subnet_public_1: pub_sub_1_HI_HACKATHON_Team1
+Hackathon_subnet_public_2: pub_sub_2_HI_HACKATHON_Team1
+Hackathon_subnet_private_1: prv_sub_1_HI_HACKATHON_Team1
+Hackathon_subnet_private_2: prv_sub_2_HI_HACKATHON_Team1

@@ -1,0 +1,6 @@
+---
+region: us-east-2 
+route_table_1_name: Hackathon_Pub_VPC1_RT
+cidr_traffic_range: 0.0.0.0/0
+route_table_2_name: Hackathon_Pub_VPC2_RT
+

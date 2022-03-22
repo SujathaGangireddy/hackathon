@@ -1,0 +1,5 @@
+---
+rhel8_amin_id: ami-0ba62214afa52bec7
+region: us-east-2
+key_name: hackathon_success_key
+

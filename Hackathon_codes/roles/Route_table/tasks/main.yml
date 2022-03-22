@@ -1,0 +1,26 @@
+---
+- name: create ec2 VPC public subnet route table
+  ec2_vpc_route_table:
+      vpc_id: "{{ ec2_vpc_1_result.vpc.id }}"
+      region: "{{ region }}"
+      state: present
+      tags:
+         Name: "{{ route_table_1_name }}"
+      subnets: [ "{{ subnet_pub_sub_1_result.subnet.id }}" ]
+      routes:
+         - dest: "{{ cidr_traffic_range }}"
+           gateway_id: "{{ igw_1_result.gateway_id }}"
+  register: public_RT_VPC1
+
+- name: create ec2 VPC_2 public subnet route table
+  ec2_vpc_route_table:
+      vpc_id: "{{ ec2_vpc_2_result.vpc.id }}"
+      region: "{{ region }}"
+      state: present
+      tags:
+         Name: "{{ route_table_2_name }}"
+      subnets: [ "{{ subnet_pub_sub_2_result.subnet.id }}" ]
+      routes:
+         - dest: "{{ cidr_traffic_range }}"
+           gateway_id: "{{ igw_2_result.gateway_id }}"
+  register: public_RT_VPC2

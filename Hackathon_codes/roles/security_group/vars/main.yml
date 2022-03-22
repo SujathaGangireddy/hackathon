@@ -1,0 +1,5 @@
+---
+region: us-east-2
+security_group_name_1: SG_1_HI-HACKATHON-CIC-I-Team-1
+traffic_ip: 0.0.0.0/0
+security_group_name_2: SG_2_HI-HACKATHON-CIC-I-Team-1

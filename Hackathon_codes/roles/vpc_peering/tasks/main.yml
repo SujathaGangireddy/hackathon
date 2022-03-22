@@ -1,0 +1,17 @@
+---
+- name: Create local account VPC peering Connection
+  ec2_vpc_peer:
+    region: "{{ region }}"
+    vpc_id: "{{ec2_vpc_1_result.vpc.id }}"
+    peer_vpc_id: "{{ec2_vpc_2_result.vpc.id }}"
+    state: present
+    tags:
+      Name: Hackathon_VPC_peering_CIC-I-Team1_
+  register: vpc_peer
+
+- name: Accept local VPC peering request
+  ec2_vpc_peer:
+    region: "{{ region }}"
+    peering_id: "{{ vpc_peer.peering_id }}"
+    state: accept
+  register: accepting_peer

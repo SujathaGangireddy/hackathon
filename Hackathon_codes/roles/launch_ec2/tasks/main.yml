@@ -1,0 +1,29 @@
+---
+- name: launce ec2 instance in VPC1
+  ec2:
+    instance_type: t2.micro
+    image: ami-0ba62214afa52bec7   ### RHEL8 image
+    count: 1
+    region: "{{ region }}"
+    key_name: "{{ key_name }}"
+    vpc_subnet_id: "{{ subnet_pub_sub_1_result.subnet.id }}"
+    group: "{{ security_group_1_results.group_name }}"
+    wait: yes
+    instance_tags:
+       Name: Ec2-VPC1_HI-HACKATHON-CIC-I-Team1
+       Env: Dev
+
+- name: launce ec2 instance in VPC2
+  ec2:
+    instance_type: t2.micro
+    image: ami-0ba62214afa52bec7   ### RHEL8 image
+    count: 2  
+    region: "{{ region }}"
+    key_name: "{{ key_name }}"
+    vpc_subnet_id: "{{ subnet_prv_sub_2_result.subnet.id }}"
+    group: "{{ security_group_2_results.group_name }}"
+    wait: yes
+    instance_tags:
+       Name: Ec2-VPC2_HI-HACKATHON-CIC-I-Team1
+       Env: Dev
+

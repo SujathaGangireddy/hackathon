@@ -1,0 +1,13 @@
+---
+- name: Create a new EC2 key
+  ec2_key:
+     name: hackathon_success_key
+     region: "{{ region }}"
+  register: ec2_result
+- name: Save private key
+  copy:
+    content: "{{ ec2_result.key.private_key }}"
+    dest: ./hackathon_success_key.pem
+    mode: '400'
+  when: ec2_result.changed
+

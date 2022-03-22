@@ -22,5 +22,5 @@
       subnets: [ "{{ subnet_pub_sub_2_result.subnet.id }}" ]
       routes:
          - dest: "{{ cidr_traffic_range }}"
-           gateway_id: "{{ igw_2_result.gateway_id }}"
-  register: public_RT_VPC2
+           gateway_id: "{{ nat_gateway.nat_gateway_id }}"
+  register: private_RT_VPC2

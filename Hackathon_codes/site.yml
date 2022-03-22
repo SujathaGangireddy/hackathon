@@ -8,6 +8,7 @@
     - Internet_Gateway
     - public_subnet
     - security_group
+    - nat-gateway
     - Route_table
     - key_ec2
 #    - launch_ec2

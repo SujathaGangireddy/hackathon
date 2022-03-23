@@ -2,7 +2,7 @@
 - name: launce ec2 instance in VPC1
   ec2:
     instance_type: t2.micro
-    image: ami-0ba62214afa52bec7   ### RHEL8 image
+    image: "{{ ubuntu_machine_image }}" 
     count: 1
     region: "{{ region }}"
     key_name: "{{ key_name }}"
@@ -10,14 +10,15 @@
     group: "{{ security_group_1_results.group_name }}"
     wait: yes
     instance_tags:
-       Name: Ec2-VPC1_HI-HACKATHON-CIC-I-Team1
+       Name: Bastion_HI-HACKATHON-CIC-I-Team1
        Env: Dev
+  register: pub_instance_status
 
 - name: launce ec2 instance in VPC2
   ec2:
     instance_type: t2.micro
-    image: ami-0ba62214afa52bec7   ### RHEL8 image
-    count: 2  
+    image: "{{ ubuntu_machine_image }}"
+    count: 1  
     region: "{{ region }}"
     key_name: "{{ key_name }}"
     vpc_subnet_id: "{{ subnet_prv_sub_2_result.subnet.id }}"
@@ -26,4 +27,24 @@
     instance_tags:
        Name: Ec2-VPC2_HI-HACKATHON-CIC-I-Team1
        Env: Dev
+  register: prv_instance_status
+
+- debug:  
+    msg: "{{ prv_instance_status.ansible_default_ipv4.address }}"
+
+- name: modify the security group
+  ec2_group:                  
+    vpc_id: "{{ ec2_vpc_2_result.vpc.id }}"
+    region: "{{ region }}"    
+    state: present            
+    name: "{{ security_group_name_2 }}"
+    description: "{{ security_group_name_2 }}"
+    tags:                     
+       Name: "{{ security_group_name_2  }}"
+    rules:                    
+    - proto: tcp              
+      ports:                  
+      - 22                    
+    cidr_ip: "{{ prv_instance_status.ansible_facts.ansible_default_ipv4.address }}"
+    rule_desc: allow all traffic for jumphost
 

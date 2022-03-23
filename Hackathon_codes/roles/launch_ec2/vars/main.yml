@@ -1,5 +1,6 @@
 ---
-rhel8_amin_id: ami-0ba62214afa52bec7
+#rhel8_amin_id: ami-0ba62214afa52bec7
+ubuntu_machine_image: ami-03a0c45ebc70f98ea
 region: us-east-2
 key_name: hackathon_success_key
-
+security_group_name_2: SG_2_HI-HACKATHON-CIC-I-Team-1

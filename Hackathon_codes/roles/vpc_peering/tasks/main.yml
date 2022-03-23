@@ -15,3 +15,39 @@
     peering_id: "{{ vpc_peer.peering_id }}"
     state: accept
   register: accepting_peer
+
+- name: create route table for vpc_1 peering
+  ec2_vpc_route_table:
+    vpc_id: "{{ ec2_vpc_1_result.vpc.id }}"
+    region: "{{ region }}"
+    tags:
+       Name: "{{ route_table_1_name }}"
+    subnets: [ "{{ subnet_pub_sub_1_result.subnet.id }}" ]   
+    route_table_id: "{{ public_RT_VPC1.route_table.id }}"
+    lookup: id
+    routes:
+       - dest: "{{ cidr_traffic_range }}"
+         gateway_id: "{{ igw_1_result.gateway_id }}"
+       - dest: "{{ cidr_vpc2_range }}"
+         gateway_id: "{{ vpc_peer.peering_id }}"
+  register: peering_RT_VPC1
+  
+  
+- name: create route table for vpc_2 peering
+  ec2_vpc_route_table:
+    vpc_id: "{{ ec2_vpc_2_result.vpc.id }}"
+    region: "{{ region }}"
+    tags:
+       Name: "{{ route_table_2_name }}"
+    subnets: [ "{{ subnet_prv_sub_2_result.subnet.id }}" ]   
+    route_table_id: "{{ private_RT_VPC2.route_table.id }}"
+    lookup: id
+    routes:
+       - dest: "{{ cidr_traffic_range }}"
+         gateway_id: "{{ nat_gateway.nat_gateway_id }}"
+       - dest: "{{ cidr_vpc1_range }}"
+         gateway_id: "{{ vpc_peer.peering_id }}"
+       
+         
+  register: peering_RT_VPC2
+  

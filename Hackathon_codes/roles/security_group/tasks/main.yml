@@ -12,9 +12,8 @@
     - proto: tcp
       ports:
       - 22
-      - 80
       cidr_ip: "{{ traffic_ip }}"
-      rule_desc: allow all traffic on port 22
+      rule_desc: allow all traffic on ssh
   register: security_group_1_results
 
 - debug:
@@ -36,9 +35,8 @@
     - proto: tcp
       ports:
       - 22
-      - 80
       cidr_ip: "{{ traffic_ip }}"
-      rule_desc: allow all traffic on port 22
+      rule_desc: allow all traffic for jumphost
   register: security_group_2_results
 
 - debug:

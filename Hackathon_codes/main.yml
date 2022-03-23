@@ -4,12 +4,12 @@
   connection: local
   gather_facts: false
   roles:
-    - ec2_vpc
-    - Internet_Gateway
-    - public_subnet
+    - creating_vpc
+    - creating_igw
+    - creating_subnets
     - security_group
     - nat-gateway
-    - Route_table
-    - key_ec2
+    - creating_route_tables
+    - creating_pemkey
 #    - launch_ec2
     - vpc_peering

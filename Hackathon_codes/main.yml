@@ -1,6 +1,7 @@
 ---
-- name: Playbook to 
+- name: Playbook to use Ansible roles for creating ec2 bastion and related resources
   hosts: localhost
+#  become: true
   connection: local
   gather_facts: false
   roles:
@@ -9,7 +10,7 @@
     - creating_subnets
     - security_group
     - nat-gateway
-    - creating_route_tables
+#    - creating_route_tables
     - creating_pemkey
-#    - launch_ec2
+    - launch_ec2
     - vpc_peering

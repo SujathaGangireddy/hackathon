@@ -1,5 +1,5 @@
 ---
-- name: create ec2 VPC public subnet route table
+- name: creating route table in VPC1
   ec2_vpc_route_table:
       vpc_id: "{{ ec2_vpc_1_result.vpc.id }}"
       region: "{{ region }}"
@@ -14,7 +14,7 @@
 - debug:
     msg: "{{ public_RT_VPC1.route_table.id }}"
 
-- name: create ec2 VPC_2 public subnet route table
+- name: creating route table in VPC2
   ec2_vpc_route_table:
       vpc_id: "{{ ec2_vpc_2_result.vpc.id }}"
       region: "{{ region }}"

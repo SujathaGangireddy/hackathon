@@ -23,8 +23,6 @@
     tags:
        Name: "{{ route_table_1_name }}"
     subnets: [ "{{ subnet_pub_sub_1_result.subnet.id }}" ]   
-    route_table_id: "{{ public_RT_VPC1.route_table.id }}"
-    lookup: id
     routes:
        - dest: "{{ cidr_traffic_range }}"
          gateway_id: "{{ igw_1_result.gateway_id }}"
@@ -40,8 +38,6 @@
     tags:
        Name: "{{ route_table_2_name }}"
     subnets: [ "{{ subnet_prv_sub_2_result.subnet.id }}" ]   
-    route_table_id: "{{ private_RT_VPC2.route_table.id }}"
-    lookup: id
     routes:
        - dest: "{{ cidr_traffic_range }}"
          gateway_id: "{{ nat_gateway.nat_gateway_id }}"
@@ -50,4 +46,10 @@
        
          
   register: peering_RT_VPC2
-  
+#- name: waiting for a few seconds to let the machine start
+#  pause:
+#    seconds: 5  
+
+#- name: Copying the ssh file on the jump server for accessing private VMs
+#  command: 'scp -i hackathon_success_key.pem hackathon_success_key.pem ubuntu@{{ pub_instance_status.instances[0].public_ip}}:/home/ubuntu'
+

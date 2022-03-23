@@ -14,6 +14,15 @@
        Env: Dev
   register: pub_instance_status
 
+- debug:
+    msg: "{{ pub_instance_status.instances[0].public_ip }}"
+
+- name: waiting for a few seconds to let the machine start
+  pause:
+     seconds: 15
+
+- name: Coptying the ssh file on the jump server for accessing private VMs    
+  command: 'scp -i hackathon_success_key.pem hackathon_success_key.pem ubuntu@{{ pub_instance_status.instances[0].public_ip }}:/home/ubuntu'
 - name: launce ec2 instance in VPC2
   ec2:
     instance_type: t2.micro
@@ -30,21 +39,7 @@
   register: prv_instance_status
 
 - debug:  
-    msg: "{{ prv_instance_status.ansible_default_ipv4.address }}"
+    msg: "{{ prv_instance_status.instances[0].private_ip }}"
 
-- name: modify the security group
-  ec2_group:                  
-    vpc_id: "{{ ec2_vpc_2_result.vpc.id }}"
-    region: "{{ region }}"    
-    state: present            
-    name: "{{ security_group_name_2 }}"
-    description: "{{ security_group_name_2 }}"
-    tags:                     
-       Name: "{{ security_group_name_2  }}"
-    rules:                    
-    - proto: tcp              
-      ports:                  
-      - 22                    
-    cidr_ip: "{{ prv_instance_status.ansible_facts.ansible_default_ipv4.address }}"
-    rule_desc: allow all traffic for jumphost
+    
 

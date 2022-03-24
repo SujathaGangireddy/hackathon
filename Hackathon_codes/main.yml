@@ -13,3 +13,4 @@
     - creating_pemkey
     - launch_ec2
     - vpc_peering_n_route_table
+    - copy_key

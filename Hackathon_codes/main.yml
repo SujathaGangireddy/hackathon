@@ -1,7 +1,6 @@
 ---
 - name: Playbook to use Ansible roles for creating ec2 bastion and related resources
   hosts: localhost
-#  become: true
   connection: local
   gather_facts: false
   roles:
@@ -14,3 +13,4 @@
     - launch_ec2
     - vpc_peering_n_route_table
     - copy_key
+    - creating_elb

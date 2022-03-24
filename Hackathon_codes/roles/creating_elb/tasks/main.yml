@@ -1,0 +1,23 @@
+---
+- name: Create the ELB only listening over port 80
+  ec2_elb_lb:
+    name: Hackathon-Team1-load-balancer
+    state: present
+    region: us-east-2
+    zones:
+      - us-eas-2a
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+  register: elb_status
+
+- name: Adding the webservers to elb
+  ec2_elb_lb:
+    name: Hackathon-Team1-load-balancer
+    instance_id: "{{ item }}"
+    state: present
+    region: us-east-2
+  loop:
+    - prv_instance_status.instances[0].id
+    - prv_instance_status.instances[1].id

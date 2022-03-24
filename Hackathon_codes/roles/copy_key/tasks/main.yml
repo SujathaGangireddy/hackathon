@@ -1,7 +1,7 @@
 ---
 - name: waiting for a few seconds to let the machine start
   pause:
-    seconds: 15
+    seconds: 10
 - name: Coptying the ssh file on the jump server for accessing private VMs
-  command: 'scp -i hackathon_success_key.pem hackathon_success_key.pem ubuntu@{{ pub_instance_status.instances[0].public_ip }}:/home/ubuntu'
-#  become: yes
+  command: 'scp -i hackathon_success_key.pem hackathon_success_key.pem ubuntu@{{ pub_instance_status.instances[0].public_ip }}:/home/ubuntu -y' 
+

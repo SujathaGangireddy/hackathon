@@ -22,7 +22,7 @@
   ec2:
     instance_type: t2.micro
     image: "{{ ubuntu_machine_image }}"
-    count: 1  
+    count: 2  
     region: "{{ region }}"
     key_name: "{{ key_name }}"
     vpc_subnet_id: "{{ subnet_prv_sub_2_result.subnet.id }}"
